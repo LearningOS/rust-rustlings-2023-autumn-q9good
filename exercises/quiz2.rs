@@ -33,15 +33,17 @@ mod my_module {
         let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
             // TODO: Complete the function body. You can do it!
-            output.push(match command {
-                Command::Uppercase => string.to_uppercase(),
-                Command::Trim => string.trim().to_string(),
-                Command::Append(cnt) => {
-                    let mut res = string.to_string();
-                    res.push_str("bar".repeat(*cnt).as_str());
-                    res
+            match command {
+                Command::Uppercase => output.push(string.to_uppercase()),
+                Command::Trim => output.push(String::from(string.trim())),
+                Command::Append(times) => {
+                    let mut s = String::from(string);
+                    for _ in 0..*times {
+                        s.push_str("bar");
+                    }
+                    output.push(s);
                 }
-            })
+            }
         }
         output
     }
